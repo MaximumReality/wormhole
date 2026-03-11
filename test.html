@@ -510,11 +510,12 @@ function ensureAudio() {
 }
 
 function playTone(freq, duration, type = 'sine', vol = 0.35) {
-  if (!audioCtx) return;
+  if (!audioCtx) audioCtx = new AudioCtx();
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+
   const osc = audioCtx.createOscillator();
   const gain = audioCtx.createGain();
-  const filter = audioCtx.createBiquadFilter(); // Smooths the "pop"
-
+  const filter = audioCtx.createBiquadFilter();
   filter.type = 'lowpass';
   filter.frequency.value = 1000;
 
@@ -545,7 +546,7 @@ function playPanelSound(idx) {
 
 function playWrong() {
   ensureAudio();
-  playTone(WRONG_FREQ, 0.6, 'sawtooth', 0.2);
+  playTone(WRONG_FREQ, 0.6, 'sawtooth', 0.4);
 }
 
 function playSuccess() {
@@ -723,6 +724,7 @@ function updateDots(completedUpTo) {
 // ── GAME FLOW ──────────────────────────────────────────────────────────
 function startGame() {
   ensureAudio();
+audioCtx.resume();
   document.getElementById('start-btn').style.display = 'none';
   gameRunning = true;
   level = 1;

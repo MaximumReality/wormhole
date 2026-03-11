@@ -342,6 +342,20 @@ html, body {
 }
 #overlay-btn:hover { background: rgba(0,229,255,0.1); }
 
+  #home-btn {
+  font-family: 'Exo 2', sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  padding: 10px 28px;
+  margin-top: 10px;
+  background: transparent;
+  border: 2px solid var(--amber);
+  color: var(--amber);
+  text-shadow: 0 0 10px var(--amber);
+  cursor: pointer;
+}
+
 /* ── SEQUENCE INDICATOR ────────────────────────────────────── */
 #seq-dots {
   display: flex;
@@ -421,6 +435,7 @@ html, body {
   <div id="speed-label">SIGNAL SPEED: STANDARD</div>
 
   <button id="start-btn" onclick="startGame()">INITIATE LINK</button>
+  <button id="home-btn" onclick="goHome()">🛰️HOME</button>
 </div>
 
 <!-- Overlay -->
@@ -737,6 +752,9 @@ function restartGame() {
   document.getElementById('progress-bar').style.width = '0%';
   document.getElementById('seq-dots').innerHTML = '';
   startGame();
+}
+  function goHome() {
+  window.location.href = "https://MaximumReality.xyz";
 }
 
 // Init display
